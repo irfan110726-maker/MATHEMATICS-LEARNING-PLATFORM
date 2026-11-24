@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Academy | Mathematics Learning Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HALAMAN LOGIN -->
+<section id="authPage" class="auth-page">
+    <div class="auth-card">
+        <div class="logo">∑</div>
+        <p class="eyebrow">MATHEMATICS LEARNING PLATFORM</p>
+        <h1>Math Academy<span>.</span></h1>
+        <p class="muted">Tingkatkan kemampuan matematikamu.</p>
+
+        <div class="auth-tabs">
+            <button id="loginTab" class="active" onclick="showAuth('login')">Login</button>
+            <button id="registerTab" onclick="showAuth('register')">Register</button>
+        </div>
+
+        <form id="loginForm">
+            <label>Email</label>
+            <input id="loginEmail" type="email" placeholder="Masukkan email" required>
+            <label>Password</label>
+            <input id="loginPassword" type="password" placeholder="Masukkan password" required>
+            <button class="primary-btn full-btn">Login Sekarang →</button>
+        </form>
+
+        <form id="registerForm" class="hidden">
+            <label>Nama Lengkap</label>
+            <input id="registerName" placeholder="Nama mahasiswa" required>
+            <label>Email</label>
+            <input id="registerEmail" type="email" placeholder="Email aktif" required>
+            <label>Password</label>
+            <input id="registerPassword" type="password" minlength="6" placeholder="Minimal 6 karakter" required>
+            <button class="primary-btn full-btn">Buat Akun +</button>
+        </form>
+
+        <p id="authMessage" class="message"></p>
+        <p class="auth-bottom">POWERED BY MATH ACADEMY • 2026</p>
+    </div>
+</section>
+
+<!-- APLIKASI UTAMA -->
+<div id="appPage" class="app hidden">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-logo">∑</div>
+            <h2>Math Academy</h2>
+            <p>LEARN • SOLVE • MASTER</p>
+        </div>
+
+        <p class="nav-label">MENU UTAMA</p>
+
+        <nav>
+            <button class="nav-btn active" data-section="dashboard" onclick="showSection('dashboard',this)"><span>⌂</span> Dashboard</button>
+            <button class="nav-btn" data-section="materials" onclick="showSection('materials',this)"><span>▤</span> Materi Kuliah</button>
+            <button class="nav-btn" data-section="calculator" onclick="showSection('calculator',this)"><span>∑</span> Kalkulator</button>
+            <button class="nav-btn" data-section="quiz" onclick="showSection('quiz',this)"><span>✎</span> Kuis Matematika</button>
+            <button class="nav-btn" data-section="practice" onclick="showSection('practice',this)"><span>⌘</span> Latihan Soal</button>
+            <button class="nav-btn" data-section="progress" onclick="showSection('progress',this)"><span>▥</span> Progress Belajar</button>
+            <button class="nav-btn" data-section="history" onclick="showSection('history',this)"><span>◷</span> Riwayat Nilai</button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="quote-icon">∫</div>
+            <p>"Matematika adalah bahasa alam semesta."</p>
+            <small>KEEP LEARNING, KEEP GROWING.</small>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div class="top-label">MATH_ACADEMY / <span>STUDENT_PANEL</span></div>
+            <div class="top-user">
+                <span class="online-dot"></span>
+                <span id="headerName">Mahasiswa</span>
+                <button class="logout-btn" onclick="logout()">Logout ↗</button>
+            </div>
+        </header>
+
+        <div class="content">
+
+            <!-- DASHBOARD -->
+            <section id="dashboard" class="page-section">
+                <div class="hero">
+                    <div class="hero-content">
+                        <p class="eyebrow">// WELCOME TO YOUR MATHEMATICAL WORLD</p>
+                        <h1>Halo, <span id="welcomeName">Mahasiswa</span>!</h1>
+                        <p>Belajar matematika lebih terarah.<br>
+                        Pahami konsep, selesaikan soal, dan tingkatkan kemampuanmu.</p>
+                        <button class="primary-btn" onclick="showSection('materials',document.querySelector('[data-section=materials]'))">Mulai Belajar →</button>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="orbit orbit-one"></div>
+                        <div class="orbit orbit-two"></div>
+                        <div class="science-symbol">∑</div>
+                        <span class="floating-symbol symbol-one">π</span>
+                        <span class="floating-symbol symbol-two">∞</span>
+                        <span class="floating-symbol symbol-three">√x</span>
+                        <span class="floating-symbol symbol-four">∫</span>
+                    </div>
+                </div>
+
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">// YOUR STATISTICS</p>
+                        <h2>Ringkasan Belajar</h2>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card blue">
+                        <div class="stat-icon">▤</div>
+                        <p>Total Materi</p>
+                        <h3 id="totalMaterials">0</h3>
+                        <small>Materi tersedia</small>
+                    </div>
+                    <div class="stat-card purple">
+                        <div class="stat-icon">✓</div>
+                        <p>Materi Selesai</p>
+                        <h3 id="completedMaterials">0</h3>
+                        <small>Sudah dipelajari</small>
+                    </div>
+                    <div class="stat-card green">
+                        <div class="stat-icon">✎</div>
+                        <p>Kuis Dikerjakan</p>
+                        <h3 id="totalQuizzes">0</h3>
+                        <small>Total percobaan</small>
+                    </div>
+                    <div class="stat-card orange">
+                        <div class="stat-icon">★</div>
+                        <p>Rata-rata Nilai</p>
+                        <h3 id="averageScore">0</h3>
+                        <small>Skala 100</small>
+                    </div>
+                </div>
+
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">// MATHEMATICS SUBJECTS</p>
+                        <h2>Bidang Matematika</h2>
+                    </div>
+                </div>
+
+                <div class="subject-grid">
+                    <button class="subject-card math" onclick="openSubject('Aljabar')">
+                        <span class="subject-icon">𝑥²</span>
+                        <h3>Aljabar</h3>
+                        <p>Persamaan dan struktur aljabar</p>
+                        <span class="subject-link">Pelajari →</span>
+                    </button>
+                    <button class="subject-card physics" onclick="openSubject('Kalkulus')">
+                        <span class="subject-icon">∫</span>
+                        <h3>Kalkulus</h3>
+                        <p>Limit, turunan, dan integral</p>
+                        <span class="subject-link">Pelajari →</span>
+                    </button>
+                    <button class="subject-card chemistry" onclick="openSubject('Statistika')">
+                        <span class="subject-icon">σ</span>
+                        <h3>Statistika</h3>
+                        <p>Analisis dan pengolahan data</p>
+                        <span class="subject-link">Pelajari →</span>
+                    </button>
+                    <button class="subject-card orange" onclick="openSubject('Matematika Diskrit')">
+                        <span class="subject-icon">∞</span>
+                        <h3>Matematika Diskrit</h3>
+                        <p>Logika, himpunan, dan graf</p>
+                        <span class="subject-link">Pelajari →</span>
+                    </button>
+                    <button class="subject-card physics" onclick="openSubject('Teori Graf')">
+                        <span class="subject-icon">◉</span>
+                        <h3>Teori Graf</h3>
+                        <p>Vertex, edge, dan algoritma</p>
+                        <span class="subject-link">Pelajari →</span>
+                    </button>
+                    <button class="subject-card green" onclick="openSubject('Persamaan Diferensial')">
+                        <span class="subject-icon">dy</span>
+                        <h3>Persamaan Diferensial</h3>
+                        <p>Model perubahan suatu sistem</p>
+                        <span class="subject-link">Pelajari →</span>
+                    </button>
+                    <button class="subject-card orange" onclick="openSubject('Matematika Aktuaria')">
+                        <span class="subject-icon">Σ</span>
+                        <h3>Matematika Aktuaria</h3>
+                        <p>Peluang dan perhitungan risiko</p>
+                        <span class="subject-link">Pelajari →</span>
+                    </button>
+                </div>
+
+                <div class="panel recent-panel">
+                    <div class="panel-heading">
+                        <h3>Aktivitas Terakhir</h3>
+                        <button class="text-btn" onclick="showSection('history',document.querySelector('[data-section=history]'))">Lihat semua →</button>
+                    </div>
+                    <div id="recentActivity"></div>
+                </div>
+            </section>
+
+            <!-- MATERI -->
+            <section id="materials" class="page-section hidden">
+                <p class="eyebrow">// KNOWLEDGE DATABASE</p>
+                <h1 class="page-title">Materi Matematika</h1>
+                <p class="muted intro">Pelajari konsep matematika dan pahami rumusnya.</p>
+
+                <div class="filter-row">
+                    <select id="subjectFilter" onchange="renderMaterials()">
+                        <option value="Semua">Semua Bidang</option>
+                        <option>Aljabar</option>
+                        <option>Kalkulus</option>
+                        <option>Statistika</option>
+                        <option>Matematika Diskrit</option>
+                        <option>Teori Graf</option>
+                        <option>Persamaan Diferensial</option>
+                        <option>Matematika Aktuaria</option>
+                    </select>
+                    <input id="materialSearch" placeholder="Cari materi..." oninput="renderMaterials()">
+                </div>
+                <div id="materialList" class="material-grid"></div>
+            </section>
+
+            <!-- KALKULATOR -->
+            <section id="calculator" class="page-section hidden">
+                <p class="eyebrow">// MATHEMATICAL TOOLS</p>
+                <h1 class="page-title">Kalkulator Matematika</h1>
+                <p class="muted intro">Hitung operasi dasar dan fungsi matematika.</p>
+
+                <div class="calculator">
+                    <div class="calc-screen">
+                        <div id="calcExpression">0</div>
+                        <div id="calcDisplay">0</div>
+                    </div>
+                    <div class="calc-buttons">
+                        <button class="calc-clear" onclick="clearCalc()">AC</button>
+                        <button onclick="deleteCalc()">DEL</button>
+                        <button onclick="appendCalc('(')">(</button>
+                        <button onclick="appendCalc(')')">)</button>
+                        <button class="calc-operator" onclick="appendCalc('/')">÷</button>
+
+                        <button onclick="appendCalc('7')">7</button>
+                        <button onclick="appendCalc('8')">8</button>
+                        <button onclick="appendCalc('9')">9</button>
+                        <button class="calc-operator" onclick="appendCalc('*')">×</button>
+                        <button class="calc-operator" onclick="appendCalc('sqrt(')">√</button>
+
+                        <button onclick="appendCalc('4')">4</button>
+                        <button onclick="appendCalc('5')">5</button>
+                        <button onclick="appendCalc('6')">6</button>
+                        <button class="calc-operator" onclick="appendCalc('-')">−</button>
+                        <button class="calc-operator" onclick="appendCalc('^')">xʸ</button>
+
+                        <button onclick="appendCalc('1')">1</button>
+                        <button onclick="appendCalc('2')">2</button>
+                        <button onclick="appendCalc('3')">3</button>
+                        <button class="calc-operator" onclick="appendCalc('+')">+</button>
+                        <button class="calc-operator" onclick="appendCalc('Math.PI')">π</button>
+
+                        <button onclick="appendCalc('0')">0</button>
+                        <button onclick="appendCalc('.')">.</button>
+                        <button onclick="appendCalc('Math.E')">e</button>
+                        <button class="calc-equal" onclick="calculate()">=</button>
+                        <button onclick="appendCalc('%')">%</button>
+                    </div>
+                    <p id="calcMessage" class="muted"></p>
+                </div>
+            </section>
+
+            <!-- KUIS -->
+            <section id="quiz" class="page-section hidden">
+                <p class="eyebrow">// TEST YOUR KNOWLEDGE</p>
+                <h1 class="page-title">Kuis Matematika</h1>
+                <p class="muted intro">Uji pemahamanmu melalui soal pilihan ganda.</p>
+
+                <div class="panel quiz-setup" id="quizSetup">
+                    <h3>Mulai Kuis Baru</h3>
+                    <label>Pilih Bidang Matematika</label>
+                    <select id="quizSubject">
+                        <option>Aljabar</option>
+                        <option>Kalkulus</option>
+                        <option>Statistika</option>
+                        <option>Matematika Diskrit</option>
+                        <option>Teori Graf</option>
+                        <option>Persamaan Diferensial</option>
+                        <option>Matematika Aktuaria</option>
+                    </select>
+                    <button class="primary-btn full-btn" onclick="startQuiz()">Mulai Kuis →</button>
+                </div>
+
+                <div id="quizArea" class="panel hidden">
+                    <div class="quiz-top">
+                        <span id="quizSubjectLabel">Matematika</span>
+                        <span id="quizCounter">Soal 1/5</span>
+                    </div>
+                    <div class="progress-track">
+                        <div id="quizProgressBar" class="progress-fill"></div>
+                    </div>
+                    <h2 id="questionText" class="question-text"></h2>
+                    <div id="answerOptions" class="answer-options"></div>
+                    <div class="quiz-footer">
+                        <p id="answerFeedback"></p>
+                        <button id="nextQuestionBtn" class="primary-btn" onclick="nextQuestion()" disabled>Soal Berikutnya →</button>
+                    </div>
+                </div>
+
+                <div id="quizResult" class="panel hidden">
+                    <div class="result-icon">🏆</div>
+                    <p class="eyebrow">QUIZ COMPLETED</p>
+                    <h2>Hasil Kuis Kamu</h2>
+                    <div id="finalScore" class="final-score">0</div>
+                    <p id="resultMessage"></p>
+                    <button class="primary-btn" onclick="resetQuiz()">Kuis Lagi ↻</button>
+                </div>
+            </section>
+
+            <!-- LATIHAN -->
+            <section id="practice" class="page-section hidden">
+                <p class="eyebrow">// PRACTICE MAKES PERFECT</p>
+                <h1 class="page-title">Latihan Soal</h1>
+                <p class="muted intro">Kerjakan soal dan periksa jawabanmu.</p>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3>Latihan Matematika</h3>
+                        <span class="subject-tag">INTERACTIVE</span>
+                    </div>
+                    <label>Pilih topik</label>
+                    <select id="practiceSubject" onchange="renderPractice()">
+                        <option>Aljabar</option>
+                        <option>Kalkulus</option>
+                        <option>Statistika</option>
+                        <option>Matematika Diskrit</option>
+                        <option>Teori Graf</option>
+                        <option>Persamaan Diferensial</option>
+                        <option>Matematika Aktuaria</option>
+                    </select>
+                    <div id="practiceQuestion"></div>
+                </div>
+            </section>
+
+            <!-- PROGRESS -->
+            <section id="progress" class="page-section hidden">
+                <p class="eyebrow">// YOUR LEARNING JOURNEY</p>
+                <h1 class="page-title">Progress Belajar</h1>
+                <p class="muted intro">Pantau perkembangan pembelajaranmu.</p>
+                <div class="panel">
+                    <h3>Progress per Bidang</h3>
+                    <div id="subjectProgress"></div>
+                    <div class="progress-summary">
+                        <div><span id="progressCompleted">0</span><p>Materi selesai</p></div>
+                        <div><span id="progressQuizzes">0</span><p>Kuis dikerjakan</p></div>
+                        <div><span id="progressAverage">0</span><p>Rata-rata nilai</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RIWAYAT -->
+            <section id="history" class="page-section hidden">
+                <p class="eyebrow">// PERFORMANCE RECORD</p>
+                <h1 class="page-title">Riwayat Nilai</h1>
+                <p class="muted intro">Catatan hasil kuis yang pernah kamu kerjakan.</p>
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3>Daftar Hasil Kuis</h3>
+                        <button class="text-btn" onclick="clearHistory()">Hapus Riwayat</button>
+                    </div>
+                    <div id="historyList"></div>
+                </div>
+            </section>
+
+            <footer>
+                <span>© 2026 MATH ACADEMY</span>
+                <span>BUILT FOR MATHEMATICS STUDENTS ∑</span>
+            </footer>
+        </div>
+    </main>
+</div>
+
+<!-- MODAL MATERI -->
+<div id="materialModal" class="modal hidden">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeMaterial()">✕</button>
+        <p id="modalSubject" class="eyebrow"></p>
+        <h2 id="modalTitle"></h2>
+        <div id="modalBody" class="material-body"></div>
+        <button id="completeMaterialBtn" class="primary-btn" onclick="completeMaterial()">Tandai Selesai ✓</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
